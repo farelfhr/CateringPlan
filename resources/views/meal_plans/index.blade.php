@@ -5,32 +5,20 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Page Header -->
         <div class="text-center mb-12">
-            <h1 class="section-title gradient-text">Our Meal Plans</h1>
+            <h1 class="section-title gradient-text">Pilih Meal Plan Favoritmu</h1>
             <p class="section-subtitle">Pilih paket makanan sehat favoritmu!</p>
         </div>
 
         <!-- Meal Plans Grid -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
             @foreach($mealPlans as $plan)
-            <div x-data="{ open: false }" class="meal-card group relative transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
-                <img src="{{ $plan->image }}" class="w-full h-40 object-cover rounded-xl mb-4">
-                <h3 class="font-heading text-xl text-navy mb-2">{{ $plan->name }}</h3>
-                <p class="text-peach font-bold mb-2">Rp{{ number_format($plan->price, 0, ',', '.') }}</p>
-                <p class="text-body text-navy mb-4">{{ $plan->description }}</p>
-                <button class="btn-primary w-full mb-2">Pesan Sekarang</button>
-                <button @click="open = true" class="btn-secondary w-full">Lihat Detail</button>
-                @if($plan->is_best_seller ?? false)
-                <span class="absolute top-4 right-4 bg-rose text-white text-xs px-3 py-1 rounded-full shadow">Best Seller</span>
-                @endif
-                <!-- Modal Detail -->
-                <div x-show="open" x-cloak class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-                    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md relative">
-                        <button @click="open = false" class="absolute top-2 right-2 text-rose text-xl">&times;</button>
-                        <h3 class="font-heading text-xl mb-2">{{ $plan->name }}</h3>
-                        <p>{{ $plan->full_details }}</p>
-                    </div>
+                <div class="meal-card flex flex-col items-center">
+                    <img src="/img/meal-{{ $plan->id }}.png" alt="{{ $plan->name }}" class="w-32 h-32 object-cover rounded-2xl mb-4 food-float" />
+                    <h2 class="font-heading text-lg text-primarybrown mb-2">{{ $plan->name }}</h2>
+                    <p class="text-primarybrown text-center mb-2">{{ $plan->description }}</p>
+                    <div class="text-primarybrown font-bold text-xl mb-4">Rp{{ number_format($plan->price,0,',','.') }}</div>
+                    <a href="{{ route('subscription', ['plan' => $plan->id]) }}" class="cute-button w-full text-center">Langganan</a>
                 </div>
-            </div>
             @endforeach
         </div>
 

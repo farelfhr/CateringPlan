@@ -165,4 +165,30 @@
         @endif
     </div>
 </div>
+
+<div class="max-w-3xl mx-auto mt-12">
+    <div class="cute-card p-8">
+        <h1 class="section-title gradient-text">Dashboard Kamu</h1>
+        <div class="mb-6">
+            <div class="text-primarybrown font-semibold mb-2">Status Langganan:</div>
+            <div class="text-lg mb-2">{{ $subscription->status ?? 'Belum Langganan' }}</div>
+            @if($subscription)
+                <div class="mb-2">Meal Plan: <span class="font-bold">{{ $subscription->mealPlan->name }}</span></div>
+                <div class="mb-2">Mulai: <span class="font-bold">{{ $subscription->start_date }}</span></div>
+                <div class="mb-2">Alamat: <span class="font-bold">{{ $subscription->address }}</span></div>
+                <div class="mb-2">No. HP: <span class="font-bold">{{ $subscription->phone }}</span></div>
+                <form method="POST" action="{{ route('subscriptions.pause', $subscription->id) }}" class="inline-block mr-2">
+                    @csrf
+                    <button type="submit" class="cute-button">Pause</button>
+                </form>
+                <form method="POST" action="{{ route('subscriptions.reactivate', $subscription->id) }}" class="inline-block">
+                    @csrf
+                    <button type="submit" class="cute-button">Reactivate</button>
+                </form>
+            @else
+                <a href="{{ route('subscription') }}" class="cute-button">Langganan Sekarang</a>
+            @endif
+        </div>
+    </div>
+</div>
 @endsection 

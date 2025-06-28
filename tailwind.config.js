@@ -10,19 +10,36 @@ export default {
     ],
 
     theme: {
+        container: {
+            center: true,
+            padding: '2rem',
+            screens: {
+                '2xl': '1400px'
+            }
+        },
         extend: {
             fontFamily: {
+                nunito: ['Nunito', 'sans-serif'],
                 heading: ['Poppins', 'sans-serif'],
                 body: ['Inter', 'sans-serif'],
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                'cute-pink': '#FFD1DC',
+                'mint-green': '#98FF98',
+                'soft-yellow': '#FFFACD',
+                'warm-peach': '#FFCCCB',
+                'baby-blue': '#89CFF0',
+                'lavender': '#E6E6FA',
+                primarybrown: '#945034',
+                primarygreen: '#5F8B4C',
+                primaryyellow: '#FFDDAB',
+                primarypink: '#FF9A9A',
                 cream: '#FFF7ED',
                 softpink: '#F9C6D1',
                 rose: '#F7A4A4',
                 peach: '#FFD6A5',
                 mint: '#C7F9CC',
-                lavender: '#E4C1F9',
                 navy: '#3A405A',
                 'pink-pastel': {
                     50: '#fdf2f8',
@@ -49,23 +66,26 @@ export default {
                     900: '#881337',
                 },
             },
+            borderRadius: {
+                '4xl': '2rem',
+            },
             animation: {
                 'bounce-gentle': 'bounce-gentle 2s infinite',
-                'wiggle': 'wiggle 1s ease-in-out infinite',
                 'float': 'float 3s ease-in-out infinite',
+                'wiggle': 'wiggle 1s ease-in-out infinite',
             },
             keyframes: {
                 'bounce-gentle': {
-                    '0%, 100%': { transform: 'translateY(0)' },
-                    '50%': { transform: 'translateY(-5px)' },
-                },
-                'wiggle': {
-                    '0%, 100%': { transform: 'rotate(-3deg)' },
-                    '50%': { transform: 'rotate(3deg)' },
+                    '0%, 100%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0,0,0.2,1)' },
+                    '50%': { transform: 'translateY(-5px)', animationTimingFunction: 'cubic-bezier(0.8,0,1,1)' }
                 },
                 'float': {
                     '0%, 100%': { transform: 'translateY(0px)' },
-                    '50%': { transform: 'translateY(-10px)' },
+                    '50%': { transform: 'translateY(-10px)' }
+                },
+                'wiggle': {
+                    '0%, 100%': { transform: 'rotate(-3deg)' },
+                    '50%': { transform: 'rotate(3deg)' }
                 }
             }
         },

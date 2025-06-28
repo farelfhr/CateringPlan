@@ -40,37 +40,22 @@
         </div>
 
         <!-- Metrics Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <!-- New Subscriptions -->
-            <div class="feature-card text-center">
-                <div class="cute-icon mb-2 text-3xl">📈</div>
-                <h3 class="text-xl font-bold text-pink-pastel-700 mb-2">New Subscriptions</h3>
-                <p class="text-3xl font-bold text-pink-pastel-600">{{ $newSubscriptions }}</p>
-                <p class="text-sm text-pink-pastel-600 mt-2">This period ✨</p>
+        <div class="max-w-5xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="cute-card p-6 flex flex-col items-center">
+                <h2 class="font-heading text-lg text-primarybrown mb-2">Total Users</h2>
+                <div class="text-3xl font-bold text-primarybrown">{{ $totalUsers }}</div>
             </div>
-
-            <!-- Monthly Recurring Revenue -->
-            <div class="feature-card text-center">
-                <div class="cute-icon mb-2 text-3xl">💰</div>
-                <h3 class="text-xl font-bold text-pink-pastel-700 mb-2">MRR</h3>
-                <p class="text-3xl font-bold text-green-600">Rp{{ number_format($mrr, 0, ',', '.') }}</p>
-                <p class="text-sm text-pink-pastel-600 mt-2">Monthly Recurring Revenue 💎</p>
+            <div class="cute-card p-6 flex flex-col items-center">
+                <h2 class="font-heading text-lg text-primarybrown mb-2">Active Subs</h2>
+                <div class="text-3xl font-bold text-primarybrown">{{ $activeSubscriptions }}</div>
             </div>
-
-            <!-- Reactivations -->
-            <div class="feature-card text-center">
-                <div class="cute-icon mb-2 text-3xl">🔄</div>
-                <h3 class="text-xl font-bold text-pink-pastel-700 mb-2">Reactivations</h3>
-                <p class="text-3xl font-bold text-blue-600">{{ $reactivations }}</p>
-                <p class="text-sm text-pink-pastel-600 mt-2">This period 🔄</p>
+            <div class="cute-card p-6 flex flex-col items-center">
+                <h2 class="font-heading text-lg text-primarybrown mb-2">Reactivated Subs</h2>
+                <div class="text-3xl font-bold text-primarybrown">{{ $reactivatedSubscriptions }}</div>
             </div>
-
-            <!-- Active Subscriptions -->
-            <div class="feature-card text-center">
-                <div class="cute-icon mb-2 text-3xl">✅</div>
-                <h3 class="text-xl font-bold text-pink-pastel-700 mb-2">Active Subscriptions</h3>
-                <p class="text-3xl font-bold text-purple-600">{{ $subscriptionGrowth }}</p>
-                <p class="text-sm text-pink-pastel-600 mt-2">Total active 💖</p>
+            <div class="cute-card p-6 flex flex-col items-center md:col-span-3">
+                <h2 class="font-heading text-lg text-primarybrown mb-2">Monthly Recurring Revenue (MRR)</h2>
+                <div class="text-3xl font-bold text-primarybrown">Rp{{ number_format($mrr,0,',','.') }}</div>
             </div>
         </div>
 

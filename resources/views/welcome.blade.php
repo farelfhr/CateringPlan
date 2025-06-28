@@ -3,35 +3,35 @@
 @section('content')
 <div class="min-h-screen relative overflow-hidden">
     <!-- Hero Section -->
-    <header class="hero-section max-w-7xl mx-auto py-16 px-8">
-        <div class="md:w-1/2 text-center md:text-left">
-            <h1 class="section-title gradient-text text-shadow mb-4">SEA Catering</h1>
-            <p class="section-subtitle mb-6">Healthy Meals, Anytime, Anywhere</p>
-            <a href="{{ route('meal_plans') }}" class="btn-primary">Lihat Menu</a>
+    <div class="hero-section mt-10 mb-16">
+        <div class="flex-1 flex flex-col justify-center items-start gap-4">
+            <h1 class="section-title gradient-text">SEA Catering: Healthy & Cute Meal Plans</h1>
+            <p class="text-lg text-primarybrown mb-4">Catering sehat, enak, dan tampil menggemaskan. Pilih meal plan favoritmu, atur langganan, dan nikmati kemudahan hidup sehat!</p>
+            <a href="{{ route('meal_plans') }}" class="cute-button">Lihat Meal Plans</a>
         </div>
-        <div class="md:w-1/2 flex justify-center mt-8 md:mt-0">
-            <img src="/img/hero-illustration.svg" alt="Healthy Food" class="w-80 h-auto">
+        <div class="flex-1 flex justify-center items-center">
+            <img src="/img/hero-food.png" alt="Cute Food" class="w-64 md:w-80 rounded-4xl shadow-xl food-float" />
         </div>
-    </header>
+    </div>
 
     <!-- Features Section Zig-Zag -->
-    <section class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16">
-        <div class="feature-card flex flex-col items-center">
-            <img src="/img/customize.svg" class="w-16 mb-4" alt="">
-            <h3 class="font-heading text-lg text-navy mb-2">Customizable</h3>
-            <p class="text-body text-navy">Pilih menu sesuai selera & kebutuhanmu.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div class="cute-card flex flex-col items-center p-6">
+            <img src="/img/feature-fresh.png" alt="Fresh" class="w-20 mb-4 food-float" />
+            <h2 class="font-heading text-xl text-primarybrown mb-2">Fresh & Healthy</h2>
+            <p class="text-primarybrown text-center">Bahan segar, menu seimbang, dan selalu baru setiap minggu.</p>
         </div>
-        <div class="feature-card flex flex-col items-center">
-            <img src="/img/delivery.svg" class="w-16 mb-4" alt="">
-            <h3 class="font-heading text-lg text-navy mb-2">Nationwide Delivery</h3>
-            <p class="text-body text-navy">Pengiriman ke kota-kota besar di Indonesia.</p>
+        <div class="cute-card flex flex-col items-center p-6">
+            <img src="/img/feature-cute.png" alt="Cute" class="w-20 mb-4 food-float" />
+            <h2 class="font-heading text-xl text-primarybrown mb-2">Cute Packaging</h2>
+            <p class="text-primarybrown text-center">Kemasan lucu, cocok untuk hadiah atau motivasi makan sehat.</p>
         </div>
-        <div class="feature-card flex flex-col items-center">
-            <img src="/img/nutrition.svg" class="w-16 mb-4" alt="">
-            <h3 class="font-heading text-lg text-navy mb-2">Nutrition Info</h3>
-            <p class="text-body text-navy">Informasi nutrisi lengkap di setiap paket.</p>
+        <div class="cute-card flex flex-col items-center p-6">
+            <img src="/img/feature-easy.png" alt="Easy" class="w-20 mb-4 food-float" />
+            <h2 class="font-heading text-xl text-primarybrown mb-2">Easy Subscription</h2>
+            <p class="text-primarybrown text-center">Langganan mudah, atur sendiri jadwal dan preferensi kamu.</p>
         </div>
-    </section>
+    </div>
 
     <!-- Contact Details Section -->
     <section class="subscription-card max-w-2xl mx-auto mt-16 text-center">

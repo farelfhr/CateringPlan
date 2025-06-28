@@ -100,6 +100,28 @@
                 </div>
             </div>
         </div>
+
+        <div class="max-w-xl mx-auto mt-12">
+            <div class="cute-card">
+                <h1 class="section-title gradient-text">Hubungi Kami</h1>
+                <form method="POST" action="{{ route('testimonials.store') }}" class="space-y-6">
+                    @csrf
+                    <div>
+                        <label class="form-label" for="name">Nama</label>
+                        <input type="text" id="name" name="name" class="cute-input w-full" value="{{ old('name') }}" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" name="email" class="cute-input w-full" value="{{ old('email') }}" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="message">Pesan</label>
+                        <textarea id="message" name="message" class="cute-input w-full" rows="4" required>{{ old('message') }}</textarea>
+                    </div>
+                    <button type="submit" class="cute-button w-full">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection 
