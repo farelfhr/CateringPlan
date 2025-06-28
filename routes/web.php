@@ -4,17 +4,19 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\MealPlanController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('/meal-plans', [MealPlanController::class, 'index'])->name('meal_plans');
 
-// Placeholder routes for other navigation items
-Route::get('/subscription', function () {
-    return view('subscription');
-})->name('subscription');
+// Subscription routes
+Route::get('/subscribe', [SubscriptionController::class, 'create'])->name('subscription');
+Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscription.store');
 
+// Contact and testimonials routes
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact');
+Route::post('/testimonials', [ContactUsController::class, 'store'])->name('testimonials.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

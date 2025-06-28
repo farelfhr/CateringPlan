@@ -17,13 +17,13 @@
             <div x-data="{ openModal: false }" class="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
                 <!-- Meal Plan Image -->
                 <div class="h-48 bg-gray-200 mb-4">
-                    <img src="{{ $plan['image'] }}" alt="{{ $plan['name'] }}" class="w-full h-full object-cover rounded-md">
+                    <img src="{{ $plan->image }}" alt="{{ $plan->name }}" class="w-full h-full object-cover rounded-md">
                 </div>
                 
                 <!-- Meal Plan Content -->
-                <h3 class="text-2xl font-semibold text-pink-600 mb-2">{{ $plan['name'] }}</h3>
-                <p class="text-xl font-bold text-gray-800 mb-2">{{ $plan['price'] }}</p>
-                <p class="text-gray-700 mb-4">{{ $plan['description'] }}</p>
+                <h3 class="text-2xl font-semibold text-pink-600 mb-2">{{ $plan->name }}</h3>
+                <p class="text-xl font-bold text-gray-800 mb-2">Rp{{ number_format($plan->price, 0, ',', '.') }}</p>
+                <p class="text-gray-700 mb-4">{{ $plan->description }}</p>
                 
                 <!-- Action Buttons -->
                 <div class="flex space-x-3">
@@ -42,11 +42,11 @@
                             ×
                         </button>
                         
-                        <h2 class="text-2xl font-bold text-pink-700 mb-4">{{ $plan['name'] }} Details</h2>
-                        <p class="text-gray-700 mb-4">{{ $plan['full_details'] }}</p>
+                        <h2 class="text-2xl font-bold text-pink-700 mb-4">{{ $plan->name }} Details</h2>
+                        <p class="text-gray-700 mb-4">{{ $plan->full_details }}</p>
                         
                         <div class="flex justify-between items-center">
-                            <span class="text-xl font-semibold text-green-600">{{ $plan['price'] }}</span>
+                            <span class="text-xl font-semibold text-green-600">Rp{{ number_format($plan->price, 0, ',', '.') }}</span>
                             <button @click="openModal = false" class="bg-pink-600 text-white py-2 px-4 rounded-lg hover:bg-pink-700 transition-colors duration-200">
                                 Close
                             </button>
