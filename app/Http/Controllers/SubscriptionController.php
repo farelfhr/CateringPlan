@@ -16,14 +16,16 @@ class SubscriptionController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'plan_id' => 'required|exists:meal_plans,id',
-            'meal_types' => 'required|array|min:1',
-            'delivery_days' => 'required|array|min:1',
-            'allergies' => 'nullable|string|max:1000',
+        // Validate the request with enhanced validation rules
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:20', 'regex:/^(\+62|0)\d{9,13}$/'],
+            'plan_id' => ['required', 'exists:meal_plans,id'],
+            'meal_types' => ['required', 'array', 'min:1'],
+            'meal_types.*' => ['in:Breakfast,Lunch,Dinner'],
+            'delivery_days' => ['required', 'array', 'min:1'],
+            'delivery_days.*' => ['in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday'],
+            'allergies' => ['nullable', 'string', 'max:1000'],
         ]);
 
         // Get the selected meal plan
@@ -34,8 +36,9 @@ class SubscriptionController extends Controller
         $deliveryDaysCount = count($request->delivery_days);
         $totalPrice = $mealPlan->price * $mealTypesCount * $deliveryDaysCount * 4.3;
 
-        // Create subscription
+        // Create subscription with user_id
         Subscription::create([
+            'user_id' => auth()->id(),
             'name' => $request->name,
             'phone' => $request->phone,
             'plan_id' => $request->plan_id,

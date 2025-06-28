@@ -19,10 +19,26 @@ class Subscription extends Model
         'allergies',
         'total_price',
         'status',
+        'pause_start_date',
+        'pause_end_date',
+        'reactivated_at',
     ];
 
     protected $casts = [
         'meal_types' => 'array',
         'delivery_days' => 'array',
+        'pause_start_date' => 'date',
+        'pause_end_date' => 'date',
+        'reactivated_at' => 'datetime',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function mealPlan()
+    {
+        return $this->belongsTo(MealPlan::class, 'plan_id');
+    }
 }

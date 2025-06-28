@@ -31,6 +31,20 @@
                             Contact Us
                         </a>
                     </li>
+                    @auth
+                        <li>
+                            <a href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') ? 'text-pink-700 font-semibold' : 'text-gray-600 hover:text-pink-500' }} transition-colors duration-200">
+                                My Dashboard
+                            </a>
+                        </li>
+                        @can('access-admin-dashboard')
+                            <li>
+                                <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'text-pink-700 font-semibold' : 'text-gray-600 hover:text-pink-500' }} transition-colors duration-200">
+                                    Admin
+                                </a>
+                            </li>
+                        @endcan
+                    @endauth
                 </ul>
             </nav>
 
@@ -59,6 +73,16 @@
                 <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-pink-700 font-semibold' : 'text-gray-600 hover:text-pink-500' }} block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200">
                     Contact Us
                 </a>
+                @auth
+                    <a href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') ? 'text-pink-700 font-semibold' : 'text-gray-600 hover:text-pink-500' }} block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200">
+                        My Dashboard
+                    </a>
+                    @can('access-admin-dashboard')
+                        <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'text-pink-700 font-semibold' : 'text-gray-600 hover:text-pink-500' }} block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200">
+                            Admin
+                        </a>
+                    @endcan
+                @endauth
             </div>
         </div>
     </div>
