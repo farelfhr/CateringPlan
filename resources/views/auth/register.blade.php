@@ -1,78 +1,34 @@
-<x-guest-layout>
-    <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <!-- Floating decorative elements -->
-        <div class="floating-heart top-20 left-20 text-3xl">💖</div>
-        <div class="floating-heart top-40 right-20 text-2xl" style="animation-delay: 1s;">🌸</div>
-        <div class="floating-heart bottom-40 left-20 text-2xl" style="animation-delay: 2s;">✨</div>
-        <div class="floating-heart bottom-20 right-40 text-3xl" style="animation-delay: 0.5s;">🍰</div>
+@extends('layouts.app')
 
-        <div class="card max-w-md w-full mx-4 relative">
-            <!-- Header -->
-            <div class="text-center mb-8">
-                <div class="cute-icon mb-4">🎉</div>
-                <h2 class="section-title">Join Our Family! 💕</h2>
-                <p class="text-pink-pastel-600">Start your delicious journey with us! 🍽️</p>
+@section('content')
+<div class="flex items-center justify-center min-h-screen bg-background">
+    <div class="w-full max-w-md bg-white/80 rounded-4xl shadow-lg p-10">
+        <h1 class="text-3xl font-heading text-brown mb-2 text-center">Join Our Family</h1>
+        <p class="text-accent text-center mb-8">Start your delicious journey with us!</p>
+        <form method="POST" action="{{ route('register') }}" class="space-y-6">
+            @csrf
+            <div>
+                <x-input-label for="name">Name</x-input-label>
+                <x-text-input name="name" required autofocus />
             </div>
-
-            <form method="POST" action="{{ route('register') }}" class="space-y-6">
-                @csrf
-
-                <!-- Name -->
-                <div>
-                    <x-input-label for="name" :value="__('Name')" class="form-label" />
-                    <x-text-input id="name" class="input-field" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Enter your full name 👤" />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-
-                <!-- Email Address -->
-                <div>
-                    <x-input-label for="email" :value="__('Email')" class="form-label" />
-                    <x-text-input id="email" class="input-field" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Enter your email ✉️" />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                </div>
-
-                <!-- Password -->
-                <div>
-                    <x-input-label for="password" :value="__('Password')" class="form-label" />
-                    <x-text-input id="password" class="input-field"
-                                    type="password"
-                                    name="password"
-                                    required autocomplete="new-password" 
-                                    placeholder="Create a strong password 🔒" />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
-
-                <!-- Confirm Password -->
-                <div>
-                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="form-label" />
-                    <x-text-input id="password_confirmation" class="input-field"
-                                    type="password"
-                                    name="password_confirmation" required autocomplete="new-password" 
-                                    placeholder="Confirm your password 🔐" />
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <a class="text-sm text-pink-pastel-600 hover:text-pink-pastel-500 underline transition-colors duration-300" href="{{ route('login') }}">
-                        {{ __('Already registered?') }} 😊
-                    </a>
-
-                    <x-primary-button class="btn-primary">
-                        {{ __('Register') }} ✨
-                    </x-primary-button>
-                </div>
-            </form>
-
-            <!-- Benefits -->
-            <div class="mt-8 p-4 bg-gradient-to-r from-pink-pastel-50 to-rose-pastel-50 rounded-xl">
-                <h3 class="text-sm font-semibold text-pink-pastel-700 mb-2">Why join us? 🌟</h3>
-                <ul class="text-xs text-pink-pastel-600 space-y-1">
-                    <li>🍽️ Customizable meal plans</li>
-                    <li>🚚 Nationwide delivery</li>
-                    <li>💝 Special member discounts</li>
-                    <li>📊 Detailed nutrition info</li>
-                </ul>
+            <div>
+                <x-input-label for="email">Email</x-input-label>
+                <x-text-input type="email" name="email" required />
             </div>
+            <div>
+                <x-input-label for="password">Password</x-input-label>
+                <x-text-input type="password" name="password" required />
+            </div>
+            <div>
+                <x-input-label for="password_confirmation">Confirm Password</x-input-label>
+                <x-text-input type="password" name="password_confirmation" required />
+            </div>
+            <x-button type="submit" variant="primary" class="w-full">Register</x-button>
+        </form>
+        <div class="text-center mt-6">
+            <span class="text-brown">Already registered?</span>
+            <a href="{{ route('login') }}" class="text-accent hover:underline font-semibold">Login</a>
         </div>
     </div>
-</x-guest-layout>
+</div>
+@endsection

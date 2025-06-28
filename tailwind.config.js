@@ -19,19 +19,21 @@ export default {
         },
         extend: {
             fontFamily: {
-                nunito: ['Nunito', 'sans-serif'],
+                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                 heading: ['Poppins', 'sans-serif'],
-                body: ['Inter', 'sans-serif'],
-                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                primary: '#FF90BB',      // Pink
+                secondary: '#FFC1DA',    // Light Pink
+                accent: '#8ACCD5',       // Blue
+                background: '#F8F8E1',   // Cream
+                brown: '#945034',
                 'cute-pink': '#FFD1DC',
                 'mint-green': '#98FF98',
                 'soft-yellow': '#FFFACD',
                 'warm-peach': '#FFCCCB',
                 'baby-blue': '#89CFF0',
                 'lavender': '#E6E6FA',
-                primarybrown: '#945034',
                 primarygreen: '#5F8B4C',
                 primaryyellow: '#FFDDAB',
                 primarypink: '#FF9A9A',

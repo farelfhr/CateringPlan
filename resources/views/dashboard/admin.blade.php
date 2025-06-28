@@ -1,149 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen py-8 relative overflow-hidden">
-    <!-- Floating decorative elements -->
-    <div class="floating-heart top-20 left-20 text-3xl">📊</div>
-    <div class="floating-heart top-40 right-20 text-2xl" style="animation-delay: 1s;">💰</div>
-    <div class="floating-heart bottom-40 left-20 text-2xl" style="animation-delay: 2s;">📈</div>
-    <div class="floating-heart bottom-20 right-40 text-3xl" style="animation-delay: 0.5s;">🎯</div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Page Header -->
-        <div class="text-center mb-12">
-            <div class="cute-icon mb-4">🌟</div>
-            <h1 class="section-title gradient-text">Admin Dashboard 📊</h1>
-            <p class="section-subtitle">Business insights and subscription management! 💼</p>
-        </div>
-
-        <!-- Date Range Filter -->
-        <div class="card mb-8 relative">
-            <div class="cute-icon absolute -top-3 -right-3">📅</div>
-            <h2 class="text-2xl font-bold text-pink-pastel-700 mb-4">Filter by Date Range 📅</h2>
-            <form method="GET" action="{{ route('admin.dashboard') }}" class="flex flex-col sm:flex-row gap-4">
-                <div class="flex-1">
-                    <label for="start_date" class="form-label">Start Date 📅</label>
-                    <input type="date" id="start_date" name="start_date" value="{{ $startDate }}"
-                           class="input-field">
-                </div>
-                <div class="flex-1">
-                    <label for="end_date" class="form-label">End Date 📅</label>
-                    <input type="date" id="end_date" name="end_date" value="{{ $endDate }}"
-                           class="input-field">
-                </div>
-                <div class="flex items-end">
-                    <button type="submit" class="btn-primary">
-                        Filter 🔍
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Metrics Grid -->
-        <div class="max-w-5xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="cute-card p-6 flex flex-col items-center">
-                <h2 class="font-heading text-lg text-primarybrown mb-2">Total Users</h2>
-                <div class="text-3xl font-bold text-primarybrown">{{ $totalUsers }}</div>
+<div class="container mx-auto py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+        <x-card>
+            <h2 class="font-heading text-lg text-brown mb-2 text-center">New Subs (This Period)</h2>
+            <div class="text-3xl font-bold text-brown text-center">{{ $newSubscriptions }}</div>
+        </x-card>
+        <x-card>
+            <h2 class="font-heading text-lg text-brown mb-2 text-center">Active Subs</h2>
+            <div class="text-3xl font-bold text-brown text-center">{{ $subscriptionGrowth }}</div>
+        </x-card>
+        <x-card>
+            <h2 class="font-heading text-lg text-brown mb-2 text-center">Reactivated Subs</h2>
+            <div class="text-3xl font-bold text-brown text-center">{{ $reactivations }}</div>
+        </x-card>
+        <x-card>
+            <h2 class="font-heading text-lg text-brown mb-2 text-center">Total Subs</h2>
+            <div class="text-3xl font-bold text-brown text-center">{{ $totalSubscriptions }}</div>
+        </x-card>
+        <x-card>
+            <h2 class="font-heading text-lg text-brown mb-2 text-center">Paused Subs</h2>
+            <div class="text-3xl font-bold text-brown text-center">{{ $pausedSubscriptions }}</div>
+        </x-card>
+        <x-card>
+            <h2 class="font-heading text-lg text-brown mb-2 text-center">Cancelled Subs</h2>
+            <div class="text-3xl font-bold text-brown text-center">{{ $cancelledSubscriptions }}</div>
+        </x-card>
+        <x-card class="md:col-span-3">
+            <h2 class="font-heading text-lg text-brown mb-2 text-center">Monthly Recurring Revenue (MRR)</h2>
+            <div class="text-3xl font-bold text-brown text-center">Rp{{ number_format($mrr,0,',','.') }}</div>
+        </x-card>
+    </div>
+    <div class="max-w-5xl mx-auto">
+        <x-card>
+            <h2 class="font-heading text-lg text-brown mb-4">Recent Subscriptions</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-accent/20">
+                    <thead class="bg-secondary/40">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-xs font-semibold text-brown">Customer</th>
+                            <th class="px-4 py-2 text-left text-xs font-semibold text-brown">Plan</th>
+                            <th class="px-4 py-2 text-left text-xs font-semibold text-brown">Total Price</th>
+                            <th class="px-4 py-2 text-left text-xs font-semibold text-brown">Status</th>
+                            <th class="px-4 py-2 text-left text-xs font-semibold text-brown">Created</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white/80 divide-y divide-accent/10">
+                        @forelse($recentSubscriptions as $subscription)
+                        <tr>
+                            <td class="px-4 py-2">{{ $subscription->user->name ?? '-' }}</td>
+                            <td class="px-4 py-2">{{ $subscription->mealPlan->name ?? '-' }}</td>
+                            <td class="px-4 py-2">Rp{{ number_format($subscription->total_price, 0, ',', '.') }}</td>
+                            <td class="px-4 py-2">{{ ucfirst($subscription->status) }}</td>
+                            <td class="px-4 py-2">{{ $subscription->created_at->format('Y-m-d') }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-brown py-4">No recent subscriptions.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
-            <div class="cute-card p-6 flex flex-col items-center">
-                <h2 class="font-heading text-lg text-primarybrown mb-2">Active Subs</h2>
-                <div class="text-3xl font-bold text-primarybrown">{{ $activeSubscriptions }}</div>
-            </div>
-            <div class="cute-card p-6 flex flex-col items-center">
-                <h2 class="font-heading text-lg text-primarybrown mb-2">Reactivated Subs</h2>
-                <div class="text-3xl font-bold text-primarybrown">{{ $reactivatedSubscriptions }}</div>
-            </div>
-            <div class="cute-card p-6 flex flex-col items-center md:col-span-3">
-                <h2 class="font-heading text-lg text-primarybrown mb-2">Monthly Recurring Revenue (MRR)</h2>
-                <div class="text-3xl font-bold text-primarybrown">Rp{{ number_format($mrr,0,',','.') }}</div>
-            </div>
-        </div>
-
-        <!-- Additional Metrics -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Total Subscriptions -->
-            <div class="feature-card text-center">
-                <div class="cute-icon mb-2">📊</div>
-                <h3 class="text-lg font-bold text-pink-pastel-700 mb-2">Total Subscriptions</h3>
-                <p class="text-2xl font-bold text-pink-pastel-600">{{ $totalSubscriptions }}</p>
-                <p class="text-sm text-pink-pastel-600 mt-2">All time 📈</p>
-            </div>
-
-            <!-- Paused Subscriptions -->
-            <div class="feature-card text-center">
-                <div class="cute-icon mb-2">⏸️</div>
-                <h3 class="text-lg font-bold text-pink-pastel-700 mb-2">Paused Subscriptions</h3>
-                <p class="text-2xl font-bold text-yellow-600">{{ $pausedSubscriptions }}</p>
-                <p class="text-sm text-pink-pastel-600 mt-2">Currently paused ⏸️</p>
-            </div>
-
-            <!-- Cancelled Subscriptions -->
-            <div class="feature-card text-center">
-                <div class="cute-icon mb-2">❌</div>
-                <h3 class="text-lg font-bold text-pink-pastel-700 mb-2">Cancelled Subscriptions</h3>
-                <p class="text-2xl font-bold text-red-600">{{ $cancelledSubscriptions }}</p>
-                <p class="text-sm text-pink-pastel-600 mt-2">Total cancelled 😢</p>
-            </div>
-        </div>
-
-        <!-- Recent Subscriptions -->
-        <div class="card relative">
-            <div class="cute-icon absolute -top-3 -right-3">📋</div>
-            <h2 class="text-2xl font-bold text-pink-pastel-700 mb-6">Recent Subscriptions 📋</h2>
-            @if($recentSubscriptions->count() > 0)
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-pink-pastel-200">
-                        <thead class="bg-gradient-to-r from-pink-pastel-50 to-rose-pastel-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-pink-pastel-700 uppercase tracking-wider">Customer 👤</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-pink-pastel-700 uppercase tracking-wider">Plan 🍽️</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-pink-pastel-700 uppercase tracking-wider">Total Price 💰</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-pink-pastel-700 uppercase tracking-wider">Status 📊</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-pink-pastel-700 uppercase tracking-wider">Created 📅</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white/50 divide-y divide-pink-pastel-200">
-                            @foreach($recentSubscriptions as $subscription)
-                            <tr class="hover:bg-pink-pastel-50 transition-colors duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-pink-pastel-800">{{ $subscription->name }}</div>
-                                    <div class="text-sm text-pink-pastel-600">{{ $subscription->user->email ?? 'N/A' }}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-pink-pastel-800">{{ $subscription->mealPlan->name ?? 'Unknown Plan' }}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-green-600">Rp{{ number_format($subscription->total_price, 0, ',', '.') }}</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                        @if($subscription->status === 'active') bg-green-100 text-green-800 border border-green-300
-                                        @elseif($subscription->status === 'paused') bg-yellow-100 text-yellow-800 border border-yellow-300
-                                        @else bg-red-100 text-red-800 border border-red-300
-                                        @endif">
-                                        {{ ucfirst($subscription->status) }}
-                                        @if($subscription->status === 'active') ✅
-                                        @elseif($subscription->status === 'paused') ⏸️
-                                        @else ❌
-                                        @endif
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-pink-pastel-600">
-                                    {{ $subscription->created_at->format('M d, Y') }}
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @else
-                <div class="text-center py-8">
-                    <div class="cute-icon mb-4 text-4xl">📊</div>
-                    <h3 class="text-lg font-bold text-pink-pastel-700 mb-2">No Subscriptions Yet 💕</h3>
-                    <p class="text-pink-pastel-600">Subscriptions will appear here once customers start subscribing! ✨</p>
-                </div>
-            @endif
-        </div>
+        </x-card>
     </div>
 </div>
 @endsection 

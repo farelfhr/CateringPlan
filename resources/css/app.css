@@ -2,67 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    body {
-        background: #FFFACD;
-        min-height: 100vh;
-        font-family: 'Nunito', sans-serif;
-    }
-    h1, h2, h3, .section-title {
-        font-family: 'Poppins', sans-serif;
-    }
-}
-
-@layer components {
-    .btn-primary, .cute-button {
-        @apply bg-cute-pink hover:bg-warm-peach text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl;
-    }
-    .btn-secondary {
-        @apply bg-soft-yellow hover:bg-cute-pink text-primarybrown font-semibold py-3 px-6 rounded-full shadow-lg transition-all duration-300;
-    }
-    .card, .cute-card {
-        @apply bg-white/80 backdrop-blur-sm rounded-4xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
-    }
-    .nav-link {
-        @apply text-primarybrown hover:text-cute-pink font-medium transition-colors duration-300;
-    }
-    .nav-link.active {
-        @apply text-cute-pink font-semibold bg-soft-yellow rounded-full px-4 py-2;
-    }
-    .input-field, .cute-input {
-        @apply bg-white/80 border-2 border-cute-pink/30 rounded-full px-4 py-3 focus:border-cute-pink focus:ring-2 focus:ring-cute-pink/20 transition-all duration-300;
-    }
-    .form-label {
-        @apply block text-sm font-semibold text-primarybrown mb-2;
-    }
-    .section-title {
-        @apply text-3xl font-bold text-primarybrown mb-6 text-center;
-    }
-    .section-subtitle {
-        @apply text-lg text-cute-pink mb-4 text-center;
-    }
-    .hero-section {
-        @apply bg-soft-yellow rounded-3xl p-8 shadow-xl flex flex-col md:flex-row items-center;
-    }
-    .feature-card {
-        @apply bg-cute-pink rounded-2xl p-6 shadow-lg border-2 border-soft-yellow transition-all duration-300;
-    }
-    .meal-card {
-        @apply bg-white rounded-2xl shadow-lg border-2 border-soft-yellow p-6 transition-all duration-300;
-    }
-    .subscription-card {
-        @apply bg-soft-yellow rounded-2xl shadow-xl border-2 border-soft-yellow p-6 transition-all duration-300;
-    }
-    .food-float {
-        animation: float 4s ease-in-out infinite;
-    }
-}
-
-@layer utilities {
-    .gradient-text {
-        background: linear-gradient(45deg, #FFD1DC, #FFCCCB, #98FF98, #FFFACD);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
+body {
+    @apply bg-background font-sans min-h-screen;
 }

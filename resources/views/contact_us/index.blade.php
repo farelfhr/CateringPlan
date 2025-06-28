@@ -1,127 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Page Header -->
-        <div class="text-center mb-12">
-            <h1 class="section-title gradient-text">Contact Us & Testimonials</h1>
-        </div>
-
-        <!-- Contact Information Section -->
-        <div class="subscription-card max-w-2xl mx-auto text-center mb-8">
-            <h2 class="section-title">Our Contact Information</h2>
-            <div class="space-y-3">
-                <p class="text-lg text-navy"><span class="font-bold">Manager:</span> Brian</p>
-                <p class="text-lg text-navy"><span class="font-bold">Phone:</span> 08123456789</p>
+<div class="container mx-auto py-12">
+    <div class="max-w-2xl mx-auto">
+        <x-card>
+            <h1 class="text-2xl font-heading text-brown mb-6 text-center">Contact Us & Testimonials</h1>
+            <div class="mb-8 text-center">
+                <div class="text-brown font-bold">Our Contact Information</div>
+                <div class="mb-1"><span class="font-bold">Manager:</span> Brian</div>
+                <div class="mb-4"><span class="font-bold">Phone:</span> 08123456789</div>
             </div>
-        </div>
-
-        <!-- Testimonial Submission Form -->
-        <div class="max-w-2xl mx-auto mb-12">
-            <h2 class="section-title">Share Your Experience</h2>
-            <form action="{{ route('testimonials.store') }}" method="POST" class="card">
+            <form method="POST" action="{{ route('testimonials.store') }}" class="space-y-6 mb-8">
                 @csrf
-                <div class="mb-6">
-                    <label for="customer_name" class="form-label">Your Name</label>
-                    <input type="text" id="customer_name" name="customer_name" required class="input-field @error('customer_name') border-red-400 @enderror" value="{{ old('customer_name') }}" placeholder="Enter your name">
-                    @error('customer_name')
-                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                    @enderror
+                <div>
+                    <x-label for="name">Your Name</x-label>
+                    <x-input name="name" placeholder="Enter your name" required />
                 </div>
-                <div class="mb-6">
-                    <label for="review_message" class="form-label">Your Review</label>
-                    <textarea id="review_message" name="review_message" rows="4" required class="input-field @error('review_message') border-red-400 @enderror" placeholder="Tell us about your experience with SEA Catering...">{{ old('review_message') }}</textarea>
-                    @error('review_message')
-                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                    @enderror
+                <div>
+                    <x-label for="review">Your Review</x-label>
+                    <textarea id="review" name="review" class="w-full bg-white/80 border-2 border-primary/30 rounded-4xl px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" rows="3" placeholder="Tell us about your experience with SEA Catering..." required>{{ old('review') }}</textarea>
                 </div>
-                <div class="mb-6">
-                    <label for="rating" class="form-label">Rating</label>
-                    <select id="rating" name="rating" required class="input-field @error('rating') border-red-400 @enderror">
+                <div>
+                    <x-label for="rating">Rating</x-label>
+                    <select id="rating" name="rating" class="w-full bg-white/80 border-2 border-primary/30 rounded-full px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" required>
                         <option value="">Select a rating</option>
-                        <option value="5" {{ old('rating') == 5 ? 'selected' : '' }}>5 (Excellent)</option>
-                        <option value="4" {{ old('rating') == 4 ? 'selected' : '' }}>4 (Good)</option>
-                        <option value="3" {{ old('rating') == 3 ? 'selected' : '' }}>3 (Average)</option>
-                        <option value="2" {{ old('rating') == 2 ? 'selected' : '' }}>2 (Below Average)</option>
-                        <option value="1" {{ old('rating') == 1 ? 'selected' : '' }}>1 (Poor)</option>
+                        <option value="5">5 - Excellent</option>
+                        <option value="4">4 - Good</option>
+                        <option value="3">3 - Average</option>
+                        <option value="2">2 - Poor</option>
+                        <option value="1">1 - Bad</option>
                     </select>
-                    @error('rating')
-                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                    @enderror
                 </div>
-                <button type="submit" class="btn-primary w-full">Submit Testimonial</button>
+                <x-button type="submit" variant="primary" class="w-full">Submit Testimonial</x-button>
             </form>
-        </div>
-
-        <!-- Testimonials Slider -->
-        <div class="max-w-2xl mx-auto mb-12" x-data="{
-            active: 0,
-            testimonials: @json($testimonials),
-            next() { this.active = (this.active + 1) % this.testimonials.length },
-            prev() { this.active = (this.active - 1 + this.testimonials.length) % this.testimonials.length }
-        }">
-            <h2 class="section-title">What Our Customers Say</h2>
-            <template x-if="testimonials.length > 0">
-                <div class="relative">
-                    <template x-for="(t, i) in testimonials" :key="i">
-                        <div x-show="active === i" class="card text-center transition-all duration-500">
-                            <p class="text-lg italic text-navy mb-2" x-text="t.review_message"></p>
-                            <div class="flex justify-center mb-2">
-                                <template x-for="star in 5">
-                                    <span :class="star <= t.rating ? 'text-rose' : 'text-cream'">&#9733;</span>
-                                </template>
+            <div>
+                <h2 class="font-heading text-lg text-brown mb-2">What Our Customers Say</h2>
+                @if($testimonials->isEmpty())
+                    <div class="text-gray-500 text-center">No testimonials yet. Be the first to share your experience!</div>
+                @else
+                    <div class="space-y-4">
+                        @foreach($testimonials as $testimonial)
+                            <div class="bg-secondary/40 rounded-2xl p-4">
+                                <div class="font-bold text-brown mb-1">{{ $testimonial->name }}</div>
+                                <div class="text-brown mb-1">{{ $testimonial->review }}</div>
+                                <div class="text-accent text-sm">Rating: {{ $testimonial->rating }}/5</div>
                             </div>
-                            <p class="font-bold text-navy" x-text="t.customer_name"></p>
-                        </div>
-                    </template>
-                    <button @click="prev" class="absolute left-0 top-1/2 -translate-y-1/2 bg-cream px-3 py-1 rounded-full shadow">&#8249;</button>
-                    <button @click="next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-cream px-3 py-1 rounded-full shadow">&#8250;</button>
-                </div>
-            </template>
-            <template x-if="testimonials.length === 0">
-                <div class="text-center py-8">
-                    <p class="text-navy">No testimonials yet. Be the first to share your experience!</p>
-                </div>
-            </template>
-        </div>
-
-        <!-- Additional Contact Information -->
-        <div class="subscription-card max-w-2xl mx-auto mt-12">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="feature-card text-center">
-                    <h3 class="font-heading text-navy mb-2">Service Areas</h3>
-                    <p class="text-navy">Major cities across Indonesia</p>
-                </div>
-                <div class="feature-card text-center">
-                    <h3 class="font-heading text-navy mb-2">Business Hours</h3>
-                    <p class="text-navy">Monday - Sunday<br>8:00 AM - 8:00 PM</p>
-                </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
-        </div>
-
-        <div class="max-w-xl mx-auto mt-12">
-            <div class="cute-card">
-                <h1 class="section-title gradient-text">Hubungi Kami</h1>
-                <form method="POST" action="{{ route('testimonials.store') }}" class="space-y-6">
-                    @csrf
-                    <div>
-                        <label class="form-label" for="name">Nama</label>
-                        <input type="text" id="name" name="name" class="cute-input w-full" value="{{ old('name') }}" required>
-                    </div>
-                    <div>
-                        <label class="form-label" for="email">Email</label>
-                        <input type="email" id="email" name="email" class="cute-input w-full" value="{{ old('email') }}" required>
-                    </div>
-                    <div>
-                        <label class="form-label" for="message">Pesan</label>
-                        <textarea id="message" name="message" class="cute-input w-full" rows="4" required>{{ old('message') }}</textarea>
-                    </div>
-                    <button type="submit" class="cute-button w-full">Kirim Pesan</button>
-                </form>
-            </div>
-        </div>
+        </x-card>
     </div>
 </div>
 @endsection 
