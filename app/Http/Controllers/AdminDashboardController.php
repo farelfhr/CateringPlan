@@ -10,21 +10,20 @@ class AdminDashboardController extends Controller
 {
     public function index(Request $request)
     {
-        // Get date range from request or default to current month
-        $startDate = $request->get('start_date', Carbon::now()->startOfMonth()->format('Y-m-d'));
-        $endDate = $request->get('end_date', Carbon::now()->endOfMonth()->format('Y-m-d'));
-
-        // Calculate metrics
-        $newSubscriptions = Subscription::whereDate('created_at', '>=', $startDate)
-            ->whereDate('created_at', '<=', $endDate)
+        $start = $request->input('start_date', now()->startOfMonth());
+        $end = $request->input('end_date', now()->endOfMonth());
+        // MRR: Total harga subscription aktif yang dibuat/berlaku di periode ini
+        $mrr = Subscription::where('status', 'active')
+            ->whereBetween('created_at', [$start, $end])
+            ->sum('total_price');
+        // Reactivations: Jumlah subscription yang diaktifkan ulang di periode ini
+        $reactivations = Subscription::whereNotNull('reactivated_at')
+            ->whereBetween('reactivated_at', [$start, $end])
             ->count();
 
-        $mrr = Subscription::where('status', 'active')->sum('total_price');
-
-        $reactivations = Subscription::where('status', 'active')
-            ->whereNotNull('reactivated_at')
-            ->whereDate('reactivated_at', '>=', $startDate)
-            ->whereDate('reactivated_at', '<=', $endDate)
+        // Calculate metrics
+        $newSubscriptions = Subscription::whereDate('created_at', '>=', $start)
+            ->whereDate('created_at', '<=', $end)
             ->count();
 
         $subscriptionGrowth = Subscription::where('status', 'active')->count();
@@ -49,8 +48,8 @@ class AdminDashboardController extends Controller
             'pausedSubscriptions',
             'cancelledSubscriptions',
             'recentSubscriptions',
-            'startDate',
-            'endDate'
+            'start',
+            'end'
         ));
     }
 }

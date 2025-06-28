@@ -18,15 +18,29 @@ class SubscriptionController extends Controller
     {
         // Validate the request with enhanced validation rules
         $validatedData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:20', 'regex:/^(\+62|0)\d{9,13}$/'],
+            'user_id' => ['required', 'exists:users,id'],
+            'meal_plan_id' => ['required', 'exists:meal_plans,id'],
+            'password' => [
+                'required', 'string', 'min:8',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&]/',
+            ],
+            'phone' => ['required', 'regex:/^(\\+62|62|08)[0-9]{8,13}$/'],
             'plan_id' => ['required', 'exists:meal_plans,id'],
             'meal_types' => ['required', 'array', 'min:1'],
             'meal_types.*' => ['in:Breakfast,Lunch,Dinner'],
             'delivery_days' => ['required', 'array', 'min:1'],
             'delivery_days.*' => ['in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday'],
             'allergies' => ['nullable', 'string', 'max:1000'],
+        ], [
+            'password.regex' => 'Password harus mengandung huruf besar, kecil, angka, dan karakter spesial.',
+            'phone.regex' => 'Nomor telepon harus format Indonesia dan hanya angka.'
         ]);
+
+        // Sanitasi input bebas user (misal allergies)
+        $allergies = strip_tags($request->input('allergies'));
 
         // Get the selected meal plan
         $mealPlan = MealPlan::findOrFail($request->plan_id);
@@ -44,7 +58,7 @@ class SubscriptionController extends Controller
             'plan_id' => $request->plan_id,
             'meal_types' => $request->meal_types,
             'delivery_days' => $request->delivery_days,
-            'allergies' => $request->allergies,
+            'allergies' => $allergies,
             'total_price' => $totalPrice,
             'status' => 'active',
         ]);

@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/user', [App\Http\Controllers\UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::post('/subscriptions/{subscription}/pause', [App\Http\Controllers\UserDashboardController::class, 'pauseSubscription'])->name('subscription.pause');
     Route::post('/subscriptions/{subscription}/cancel', [App\Http\Controllers\UserDashboardController::class, 'cancelSubscription'])->name('subscription.cancel');
+    Route::post('/subscriptions/{subscription}/reactivate', [App\Http\Controllers\UserDashboardController::class, 'reactivateSubscription'])->name('subscription.reactivate');
     
     // Add other authenticated routes here later for User Dashboard
 });

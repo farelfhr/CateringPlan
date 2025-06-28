@@ -1,3 +1,86 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        background: linear-gradient(135deg, #FFF7ED 0%, #F9C6D1 50%, #FFD6A5 100%);
+        min-height: 100vh;
+        font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, .section-title {
+        font-family: 'Poppins', sans-serif;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply bg-rose hover:bg-softpink text-white font-semibold py-3 px-6 rounded-full shadow-lg transition-all duration-300;
+    }
+    
+    .btn-secondary {
+        @apply bg-peach hover:bg-rose text-navy font-semibold py-3 px-6 rounded-full shadow-lg transition-all duration-300;
+    }
+    
+    .card {
+        @apply bg-white/90 rounded-2xl shadow-xl border border-softpink p-6 transition-all duration-300;
+    }
+    
+    .nav-link {
+        @apply text-navy hover:text-rose font-medium transition-colors duration-300;
+    }
+    
+    .nav-link.active {
+        @apply text-rose font-semibold bg-softpink rounded-full px-4 py-2;
+    }
+    
+    .input-field {
+        @apply w-full px-4 py-3 border-2 border-softpink rounded-xl focus:border-rose focus:ring-2 focus:ring-softpink transition-all duration-300 bg-white/80;
+    }
+    
+    .form-label {
+        @apply block text-sm font-semibold text-navy mb-2;
+    }
+    
+    .section-title {
+        @apply text-3xl font-bold text-navy mb-6 text-center;
+    }
+    
+    .section-subtitle {
+        @apply text-lg text-rose mb-4 text-center;
+    }
+    
+    .hero-section {
+        @apply bg-gradient-to-br from-cream via-softpink to-peach rounded-3xl p-8 shadow-xl flex flex-col md:flex-row items-center;
+    }
+    
+    .feature-card {
+        @apply bg-gradient-to-br from-cream to-softpink rounded-2xl p-6 shadow-lg border-2 border-softpink transition-all duration-300;
+    }
+    
+    .meal-card {
+        @apply bg-white/95 rounded-2xl shadow-lg border-2 border-softpink p-6 transition-all duration-300;
+    }
+    
+    .subscription-card {
+        @apply bg-gradient-to-br from-cream to-peach rounded-2xl shadow-xl border-2 border-softpink p-6 transition-all duration-300;
+    }
+}
+
+@layer utilities {
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(236, 72, 153, 0.1);
+    }
+    
+    .glass-effect {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.7);
+    }
+    
+    .gradient-text {
+        background: linear-gradient(45deg, #F7A4A4, #F9C6D1, #FFD6A5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+}
