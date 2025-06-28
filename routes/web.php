@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\MealPlanController;
+use App\Http\Controllers\ContactUsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
@@ -13,9 +14,7 @@ Route::get('/subscription', function () {
     return view('subscription');
 })->name('subscription');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
