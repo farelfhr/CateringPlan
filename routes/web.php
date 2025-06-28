@@ -1,11 +1,21 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\MealPlanController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('home');
+Route::get('/meal-plans', [MealPlanController::class, 'index'])->name('meal_plans');
+
+// Placeholder routes for other navigation items
+Route::get('/subscription', function () {
+    return view('subscription');
+})->name('subscription');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
