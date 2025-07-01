@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="flex-1 flex justify-center">
-                <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=800&q=80" 
+                <img src="https://i.pinimg.com/736x/aa/36/61/aa366150e928260743e208fec5f80175.jpg" 
                      alt="Healthy Colorful Salad Bowl" class="w-80 md:w-96 rounded-4xl shadow-2xl transform hover:scale-105 transition-transform duration-300 object-cover" />
             </div>
         </div>
@@ -98,42 +98,42 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             <!-- Menu 1 -->
             <div class="relative group rounded-3xl overflow-hidden shadow-lg">
-                <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=600&q=80" alt="Salmon Panggang dengan Asparagus" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src="https://i.pinimg.com/736x/2f/4c/8a/2f4c8a759f43cee7d6cb95c64926cbf1.jpg" alt="Salmon Panggang dengan Asparagus" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span class="text-white text-xl font-heading font-bold">Salmon Panggang dengan Asparagus</span>
                 </div>
             </div>
             <!-- Menu 2 -->
             <div class="relative group rounded-3xl overflow-hidden shadow-lg">
-                <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=600&q=80" alt="Chicken Quinoa Bowl" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src="https://i.pinimg.com/736x/8a/72/7a/8a727ac7bd964b50f1826dca683e0aad.jpg" alt="Chicken Quinoa Bowl" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span class="text-white text-xl font-heading font-bold">Chicken Quinoa Bowl</span>
                 </div>
             </div>
             <!-- Menu 3 -->
             <div class="relative group rounded-3xl overflow-hidden shadow-lg">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Vegan Buddha Bowl" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src="https://i.pinimg.com/736x/48/5b/b9/485bb9b9b4970e5e881a2399bbc6f694.jpg" alt="Vegan Buddha Bowl" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span class="text-white text-xl font-heading font-bold">Vegan Buddha Bowl</span>
                 </div>
             </div>
             <!-- Menu 4 -->
             <div class="relative group rounded-3xl overflow-hidden shadow-lg">
-                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80" alt="Grilled Chicken Caesar" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src="https://i.pinimg.com/736x/fb/0c/51/fb0c51a99bfc989f469103ce032b1817.jpg" alt="Grilled Chicken Caesar" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span class="text-white text-xl font-heading font-bold">Grilled Chicken Caesar</span>
                 </div>
             </div>
             <!-- Menu 5 -->
             <div class="relative group rounded-3xl overflow-hidden shadow-lg">
-                <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0723c6a?auto=format&fit=crop&w=600&q=80" alt="Tuna Avocado Salad" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src="https://i.pinimg.com/736x/76/1c/8b/761c8b0523499402ec14e343f2db5f03.jpg" alt="Tuna Avocado Salad" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span class="text-white text-xl font-heading font-bold">Tuna Avocado Salad</span>
                 </div>
             </div>
             <!-- Menu 6 -->
             <div class="relative group rounded-3xl overflow-hidden shadow-lg">
-                <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80" alt="Fruit Parfait" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img src="https://i.pinimg.com/736x/dd/cf/62/ddcf62fe859e916136e60677f937b805.jpg" alt="Fruit Parfait" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span class="text-white text-xl font-heading font-bold">Fruit Parfait</span>
                 </div>

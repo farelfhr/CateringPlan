@@ -16,4 +16,9 @@ class MealPlan extends Model
         'full_details',
         'image',
     ];
+
+    public function subscriptions()
+    {
+        return $this->hasMany(\App\Models\Subscription::class, 'plan_id');
+    }
 }

@@ -2,13 +2,17 @@
     <div class="flex items-center space-x-3">
         <a href="/" class="text-2xl font-heading text-primarybrown font-bold animate-bounce-gentle">CateringPlan</a>
     </div>
-    <div class="flex items-center space-x-2 md:space-x-4">
+    <div class="flex items-center sm:ms-10 space-x-8">
         <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
         <a href="{{ route('meal_plans') }}" class="nav-link {{ request()->routeIs('meal_plans') ? 'active' : '' }}">Meal Plans</a>
         <a href="{{ route('subscriptions.create') }}" class="nav-link {{ request()->routeIs('subscriptions.create') ? 'active' : '' }}">Subscribe</a>
         <a href="{{ route('contact-us.index') }}" class="nav-link {{ request()->routeIs('contact-us.index') ? 'active' : '' }}">Contact</a>
         @auth
             <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
+            <form method="POST" action="{{ route('logout') }}" class="ml-2">
+                @csrf
+                <button type="submit" class="nav-link bg-white border border-pink-200 text-brown hover:bg-pink-50 rounded-full px-4 py-2 transition-colors">Log Out</button>
+            </form>
         @endauth
         @guest
             <a href="{{ route('login') }}" class="nav-link">Login</a>
@@ -16,6 +20,7 @@
     </div>
 
     <!-- Settings Dropdown -->
+    @auth
     <div class="hidden sm:flex sm:items-center sm:ms-6">
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
@@ -48,6 +53,7 @@
             </x-slot>
         </x-dropdown>
     </div>
+    @endauth
 
     <!-- Hamburger -->
     <div class="-me-2 flex items-center sm:hidden">

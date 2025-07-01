@@ -1,5 +1,5 @@
 <nav class="bg-white/80 backdrop-blur-sm shadow-lg rounded-4xl mt-4 mx-auto max-w-5xl px-6 py-3 flex items-center justify-between sticky top-4 z-50" x-data="{ mobileMenuOpen: false }">
-    <a href="{{ route('home') }}" class="text-2xl font-heading text-brown font-bold hover:text-pink-400 transition-colors duration-300">
+    <a href="{{ route('home') }}" class="text-2xl font-heading mx-6 text-brown font-bold hover:text-pink-400 transition-colors duration-300">
         SEA Catering
     </a>
     
@@ -36,6 +36,12 @@
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
                 </span>
             </x-nav-link>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="ml-2 text-brown hover:text-red-500 font-semibold transition-colors px-4 py-2 rounded-full">
+                    Log Out
+                </button>
+            </form>
         @endauth
         @guest
             <x-nav-link :href="route('login')" class="group">
@@ -83,6 +89,12 @@
                 <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="block py-2 px-4 rounded-lg hover:bg-pink-50 transition-colors duration-300">
                     Dashboard
                 </x-nav-link>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="block w-full text-left py-2 px-4 rounded-lg hover:bg-red-50 text-brown hover:text-red-500 font-semibold transition-colors">
+                        Log Out
+                    </button>
+                </form>
             @endauth
             @guest
                 <x-nav-link :href="route('login')" class="block py-2 px-4 rounded-lg hover:bg-pink-50 transition-colors duration-300">
