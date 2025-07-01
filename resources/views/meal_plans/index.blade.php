@@ -41,8 +41,8 @@
                         <span class="text-sm text-brown ml-2">(4.0)</span>
                     </div>
                     
-                    <x-button :href="route('subscription', ['plan' => $plan->id])" 
-                             variant="primary" 
+                    <x-button href="{{ route('subscription') }}?plan={{ $plan->id }}"
+                             variant="primary"
                              class="w-full text-center group-hover:bg-pink-500 transition-colors duration-300">
                         Langganan Sekarang
                     </x-button>
@@ -172,11 +172,10 @@
                     
                     <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <x-button :href="route('subscription', ['plan' => $plan->id])" 
-                                 variant="primary" 
-                                 class="flex-1 text-center">
+                        <a x-bind:href="'/subscribe?plan=' + plan.id"
+                           class="flex-1 text-center bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-2xl transition-colors duration-300 block text-center">
                             Langganan Sekarang
-                        </x-button>
+                        </a>
                         <x-button @click="selectedPlan = null" 
                                  variant="secondary" 
                                  class="flex-1 text-center">

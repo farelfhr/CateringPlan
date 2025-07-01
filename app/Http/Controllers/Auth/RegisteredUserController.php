@@ -42,6 +42,8 @@ class RegisteredUserController extends Controller
             'role' => 'user',
         ]);
 
+        \Log::info('USER REGISTERED', ['user_id' => $user->id, 'email' => $user->email]);
+
         event(new Registered($user));
 
         Auth::login($user);

@@ -16,8 +16,6 @@ class Subscription extends Model
         'plan_id',
         'meal_types',
         'delivery_days',
-        'start_date',
-        'address',
         'allergies',
         'total_price',
         'status',
@@ -29,7 +27,6 @@ class Subscription extends Model
     protected $casts = [
         'meal_types' => 'array',
         'delivery_days' => 'array',
-        'start_date' => 'date',
         'pause_start_date' => 'date',
         'pause_end_date' => 'date',
         'reactivated_at' => 'datetime',

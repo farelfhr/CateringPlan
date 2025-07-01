@@ -35,9 +35,6 @@ Route::middleware(['auth'])->group(function () {
 // Admin routes
 Route::middleware(['auth', 'can:access-admin-dashboard'])->group(function () {
     Route::get('/dashboard/admin', [App\Http\Controllers\AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/dashboard/admin/testimonials', [App\Http\Controllers\Admin\TestimonialController::class, 'index'])->name('admin.testimonials.index');
-    Route::patch('/dashboard/admin/testimonials/{id}/approve', [App\Http\Controllers\Admin\TestimonialController::class, 'approve'])->name('admin.testimonials.approve');
-    Route::delete('/dashboard/admin/testimonials/{id}', [App\Http\Controllers\Admin\TestimonialController::class, 'destroy'])->name('admin.testimonials.destroy');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

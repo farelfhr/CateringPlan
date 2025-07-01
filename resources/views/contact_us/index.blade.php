@@ -5,13 +5,7 @@
     currentSlide: 0,
     rating: 0,
     hoverRating: 0,
-    testimonials: {!! $testimonials->map(function($t) {
-        return [
-            'customer_name' => $t->customer_name ?? $t->name,
-            'review_message' => $t->review_message ?? $t->review,
-            'rating' => $t->rating,
-        ];
-    })->toJson() !!}
+    testimonials: {{ $testimonials->toJson() }}
 }">
     <div class="max-w-6xl mx-auto">
         <!-- Header -->
@@ -86,36 +80,6 @@
                 <x-card>
                     <h2 class="text-2xl font-heading text-brown mb-6 text-center">Bagikan Pengalaman Anda</h2>
                     
-                    <!-- Success Message -->
-                    @if(session('success'))
-                        <div class="mb-6 bg-green-50 border border-green-200 rounded-2xl p-4">
-                            <div class="flex items-center mb-3">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <h3 class="text-green-800 font-medium">Berhasil!</h3>
-                            </div>
-                            <p class="text-green-700 text-sm">{{ session('success') }}</p>
-                        </div>
-                    @endif
-
-                    <!-- Error Messages -->
-                    @if ($errors->any())
-                        <div class="mb-6 bg-red-50 border border-red-200 rounded-2xl p-4">
-                            <div class="flex items-center mb-3">
-                                <svg class="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                <h3 class="text-red-800 font-medium">Terjadi kesalahan:</h3>
-                            </div>
-                            <ul class="text-red-700 text-sm space-y-1">
-                                @foreach ($errors->all() as $error)
-                                    <li>• {{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    
                     <form method="POST" action="{{ route('testimonials.store') }}" class="space-y-6">
                         @csrf
                         
@@ -177,7 +141,7 @@
                                 <div class="text-center">
                                     <!-- Avatar -->
                                     <div class="w-20 h-20 bg-gradient-to-br from-pink-400 to-blue-400 rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <span class="text-white text-2xl font-bold" x-text="testimonial.customer_name.charAt(0).toUpperCase()"></span>
+                                        <span class="text-white text-2xl font-bold" x-text="testimonial.name.charAt(0).toUpperCase()"></span>
                                     </div>
                                     
                                     <!-- Rating -->
@@ -194,12 +158,12 @@
                                         <svg class="w-12 h-12 text-pink-200 absolute -top-6 -left-6" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                                         </svg>
-                                        <p class="text-lg text-brown leading-relaxed italic" x-text="testimonial.review_message"></p>
+                                        <p class="text-lg text-brown leading-relaxed italic" x-text="testimonial.review"></p>
                                     </div>
                                     
                                     <!-- Author -->
                                     <div>
-                                        <h4 class="font-heading text-xl text-brown font-semibold" x-text="testimonial.customer_name"></h4>
+                                        <h4 class="font-heading text-xl text-brown font-semibold" x-text="testimonial.name"></h4>
                                         <p class="text-brown">Pelanggan Setia</p>
                                     </div>
                                 </div>
@@ -288,4 +252,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endsection
+@endsection 
