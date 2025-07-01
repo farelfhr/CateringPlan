@@ -19,9 +19,6 @@ class Subscription extends Model
         'allergies',
         'total_price',
         'status',
-        'pause_start_date',
-        'pause_end_date',
-        'reactivated_at',
     ];
 
     protected $casts = [

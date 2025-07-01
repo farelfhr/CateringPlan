@@ -11,7 +11,16 @@ class UserDashboardController extends Controller
     public function index()
     {
         $subscriptions = auth()->user()->subscriptions()->with('mealPlan')->get();
-        return view('dashboard.user', compact('subscriptions'));
+        $activeSubscriptionsCount = $subscriptions->where('status', 'active')->count();
+        $pausedSubscriptionsCount = $subscriptions->where('status', 'paused')->count();
+        $totalSpending = $subscriptions->sum('total_price');
+
+        return view('dashboard.user', compact(
+            'subscriptions',
+            'activeSubscriptionsCount',
+            'pausedSubscriptionsCount',
+            'totalSpending'
+        ));
     }
 
     public function pauseSubscription(Request $request, Subscription $subscription, SubscriptionService $service)
@@ -21,7 +30,7 @@ class UserDashboardController extends Controller
             abort(403, 'Unauthorized action.');
         }
         
-        $request->validate([
+        $request->validateWithBag('pauseSubscription', [
             'pause_start_date' => 'required|date|after:today',
             'pause_end_date' => 'required|date|after:pause_start_date',
         ]);
