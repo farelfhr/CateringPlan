@@ -71,6 +71,13 @@
                             <x-button variant="accent">Reactivate</x-button>
                         </form>
                         @endif
+                        
+                        @if($subscription->status === 'active' || $subscription->status === 'paused')
+                        <form method="POST" action="{{ route('subscription.cancel', $subscription->id) }}" class="inline">
+                            @csrf
+                            <x-button type="submit" variant="danger" onclick="return confirm('Anda yakin ingin membatalkan langganan ini?')">Cancel Subscription</x-button>
+                        </form>
+                        @endif
                     </div>
                 </div>
             @endforeach

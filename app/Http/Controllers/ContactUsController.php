@@ -9,7 +9,7 @@ class ContactUsController extends Controller
 {
     public function index()
     {
-        $testimonials = Testimonial::all();
+        $testimonials = Testimonial::where('status', 'approved')->get();
         
         // Add dummy testimonials if none exist for demo
         if ($testimonials->isEmpty()) {

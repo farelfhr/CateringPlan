@@ -1,5 +1,5 @@
 @props([
-    'variant' => 'primary', // primary, secondary, accent
+    'variant' => 'primary', // primary, secondary, accent, danger
     'type' => 'button',
     'href' => null,
 ])
@@ -10,6 +10,7 @@
         'primary' => 'bg-primary text-white hover:bg-secondary shadow-lg',
         'secondary' => 'bg-secondary text-brown hover:bg-primary shadow',
         'accent' => 'bg-accent text-brown hover:bg-primary shadow',
+        'danger' => 'bg-red-500 text-white hover:bg-red-600 shadow-lg',
     ];
 @endphp
 
@@ -21,4 +22,4 @@
 <button type="{{ $type }}" {{ $attributes->merge(['class' => "$base {$variants[$variant]} px-6 py-3"]) }}>
     {{ $slot }}
 </button>
-@endif 
+@endif

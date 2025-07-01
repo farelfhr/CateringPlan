@@ -23,6 +23,9 @@ Route::middleware(['auth'])->group(function () {
     })->name('subscription');
     Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscription.store');
     
+    // Alternative route for subscription creation
+    Route::get('/subscriptions/create', [SubscriptionController::class, 'create'])->name('subscription.create');
+    
     // User Dashboard routes
     Route::get('/dashboard/user', [App\Http\Controllers\UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::post('/subscriptions/{subscription}/pause', [App\Http\Controllers\UserDashboardController::class, 'pauseSubscription'])->name('subscription.pause');

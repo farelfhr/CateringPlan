@@ -3,11 +3,13 @@
 @section('content')
 <div class="container mx-auto py-12 px-4" x-data="{
     selectedPlan: {{ old('plan', $mealPlans->first()->id ?? 1) }},
-    selectedMealTypes: [],
-    selectedDeliveryDays: [],
+    selectedMealTypes: @json(old('meal_types', [])),
+    selectedDeliveryDays: @json(old('delivery_days', [])),
     startDate: '{{ old('start_date', now()->addDays(7)->format('Y-m-d')) }}',
     address: '{{ old('address', '') }}',
     phone: '{{ old('phone', '') }}',
+    allergies: '{{ old('allergies', '') }}',
+    isSubmitting: false,
     mealPlans: {{ $mealPlans->toJson() }},
     get selectedPlanData() {
         return this.mealPlans.find(plan => plan.id == this.selectedPlan);
@@ -55,7 +57,27 @@
             <div>
                 <x-card>
                     <h2 class="text-2xl font-heading text-brown mb-6 text-center">Detail Langganan</h2>
-                    <form method="POST" action="{{ route('subscription.store') }}" class="space-y-6">
+                    
+                    <!-- Error Messages -->
+                    @if ($errors->any())
+                        <div class="mb-6 bg-red-50 border border-red-200 rounded-2xl p-4">
+                            <div class="flex items-center mb-3">
+                                <svg class="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <h3 class="text-red-800 font-medium">Terjadi kesalahan:</h3>
+                            </div>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                @foreach ($errors->all() as $error)
+                                    <li>• {{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('subscription.store') }}" class="space-y-6" 
+                          @submit="isSubmitting = true" 
+                          x-bind:class="{ 'opacity-50 pointer-events-none': isSubmitting }">
                         @csrf
                         <div>
                             <x-label>Pilih Meal Plan</x-label>
@@ -85,7 +107,12 @@
                             <div class="grid grid-cols-2 gap-3">
                                 <template x-for="type in ['Sarapan', 'Makan Siang', 'Makan Malam', 'Snack']" :key="type">
                                     <label class="relative cursor-pointer">
-                                        <input type="checkbox" name="meal_types[]" :value="type" x-model="selectedMealTypes" @change="toggleMealType(type)" class="sr-only">
+                                        <input type="checkbox" 
+                                               name="meal_types[]" 
+                                               :value="type" 
+                                               :checked="selectedMealTypes.includes(type)"
+                                               @change="toggleMealType(type)"
+                                               class="sr-only">
                                         <div class="border-2 rounded-xl p-3 text-center transition-all duration-200 flex items-center justify-center relative"
                                             :class="selectedMealTypes.includes(type)
                                                 ? 'border-pink-400 bg-pink-100 ring-2 ring-pink-300 scale-105 shadow-lg'
@@ -107,7 +134,12 @@
                             <div class="grid grid-cols-2 gap-3">
                                 <template x-for="day in ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']" :key="day">
                                     <label class="relative cursor-pointer">
-                                        <input type="checkbox" name="delivery_days[]" :value="day" x-model="selectedDeliveryDays" @change="toggleDeliveryDay(day)" class="sr-only">
+                                        <input type="checkbox" 
+                                               name="delivery_days[]" 
+                                               :value="day" 
+                                               :checked="selectedDeliveryDays.includes(day)"
+                                               @change="toggleDeliveryDay(day)"
+                                               class="sr-only">
                                         <div class="border-2 rounded-xl p-3 text-center transition-all duration-200 flex items-center justify-center relative"
                                             :class="selectedDeliveryDays.includes(day)
                                                 ? 'border-blue-400 bg-blue-100 ring-2 ring-blue-300 scale-105 shadow-lg'
@@ -135,7 +167,21 @@
                             <x-label for="phone">No. HP</x-label>
                             <x-input name="phone" x-model="phone" placeholder="08123456789" required />
                         </div>
-                        <x-button type="submit" variant="primary" class="w-full text-lg py-4">Buat Langganan</x-button>
+                        <div>
+                            <x-label for="allergies">Alergi (Opsional)</x-label>
+                            <textarea name="allergies" x-model="allergies" class="w-full bg-white/80 border-2 border-primary/30 rounded-2xl px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none" rows="3" placeholder="Sebutkan alergi makanan yang Anda miliki (jika ada)..."></textarea>
+                        </div>
+                        <x-button type="submit" variant="primary" class="w-full text-lg py-4" 
+                                  x-bind:disabled="isSubmitting || selectedMealTypes.length === 0 || selectedDeliveryDays.length === 0">
+                            <span x-show="!isSubmitting">Buat Langganan</span>
+                            <span x-show="isSubmitting" class="flex items-center">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Memproses...
+                            </span>
+                        </x-button>
                     </form>
                 </x-card>
             </div>
@@ -241,4 +287,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection

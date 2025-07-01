@@ -2,6 +2,37 @@
 
 @section('content')
 <div class="container mx-auto py-12">
+    <!-- Date Range Filter -->
+    <div class="max-w-5xl mx-auto mb-8">
+        <x-card>
+            <h2 class="font-heading text-lg text-brown mb-4">Filter Dashboard</h2>
+            <form method="GET" action="{{ route('admin.dashboard') }}" class="flex flex-wrap gap-4 items-end">
+                <div class="flex-1 min-w-48">
+                    <label for="start_date" class="block text-sm font-medium text-brown mb-1">Tanggal Mulai</label>
+                    <input type="date" 
+                           id="start_date" 
+                           name="start_date" 
+                           value="{{ request('start_date') }}"
+                           class="w-full px-3 py-2 border border-accent/30 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+                <div class="flex-1 min-w-48">
+                    <label for="end_date" class="block text-sm font-medium text-brown mb-1">Tanggal Selesai</label>
+                    <input type="date" 
+                           id="end_date" 
+                           name="end_date" 
+                           value="{{ request('end_date') }}"
+                           class="w-full px-3 py-2 border border-accent/30 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+                <div class="flex gap-2">
+                    <x-button type="submit" variant="primary">Filter</x-button>
+                    <a href="{{ route('admin.dashboard') }}">
+                        <x-button type="button" variant="secondary">Reset</x-button>
+                    </a>
+                </div>
+            </form>
+        </x-card>
+    </div>
+    
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
         <x-card>
             <h2 class="font-heading text-lg text-brown mb-2 text-center">New Subs (This Period)</h2>
@@ -66,4 +97,4 @@
         </x-card>
     </div>
 </div>
-@endsection 
+@endsection
