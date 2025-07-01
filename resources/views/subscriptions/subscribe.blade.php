@@ -55,8 +55,16 @@
             <div>
                 <x-card>
                     <h2 class="text-2xl font-heading text-brown mb-6 text-center">Detail Langganan</h2>
-                    <form method="POST" action="{{ route('subscription.store') }}" class="space-y-6">
+                    <form method="POST" action="{{ route('subscription.store') }}" class="space-y-6" @submit.prevent="
+                        $refs.plan.value = selectedPlan;
+                        $refs.mealTypes.value = JSON.stringify(selectedMealTypes);
+                        $refs.deliveryDays.value = JSON.stringify(selectedDeliveryDays);
+                        $el.submit();
+                    ">
                         @csrf
+                        <input type="hidden" name="plan" x-ref="plan">
+                        <input type="hidden" name="meal_types" x-ref="mealTypes">
+                        <input type="hidden" name="delivery_days" x-ref="deliveryDays">
                         <div>
                             <x-label>Pilih Meal Plan</x-label>
                             <div class="grid grid-cols-1 gap-4 mt-3">
