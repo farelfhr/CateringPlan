@@ -14,9 +14,15 @@
             <x-card class="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" 
                     @click="selectedPlan = {{ $plan->id }}">
                 <div class="relative overflow-hidden rounded-2xl mb-6">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" 
-                         alt="{{ $plan->name }}" 
-                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+                    @if(strtolower($plan->name) === 'diet plan')
+                        <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80" alt="Diet Plan" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+                    @elseif(strtolower($plan->name) === 'protein plan')
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Protein Plan" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+                    @elseif(strtolower($plan->name) === 'royal plan')
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Royal Plan" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+                    @else
+                        <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=600&q=80" alt="{{ $plan->name }}" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+                    @endif
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <p class="text-sm">Klik untuk detail lengkap</p>
@@ -85,9 +91,14 @@
                     
                     <!-- Image -->
                     <div class="relative mb-6">
-                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" 
-                             :alt="plan.name" 
-                             class="w-full h-64 object-cover rounded-2xl" />
+                        <img 
+                            :src="selectedPlan && mealPlans.find(p => p.id === selectedPlan) && mealPlans.find(p => p.id === selectedPlan).name.toLowerCase() === 'diet plan' ? 'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=800&q=80' :
+                                  selectedPlan && mealPlans.find(p => p.id === selectedPlan) && mealPlans.find(p => p.id === selectedPlan).name.toLowerCase() === 'protein plan' ? 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80' :
+                                  selectedPlan && mealPlans.find(p => p.id === selectedPlan) && mealPlans.find(p => p.id === selectedPlan).name.toLowerCase() === 'royal plan' ? 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80' :
+                                  'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=800&q=80'"
+                            :alt="plan.name"
+                            class="w-full h-64 object-cover rounded-2xl"
+                        />
                     </div>
                     
                     <!-- Price -->

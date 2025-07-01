@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto py-12">
     <!-- Date Range Filter -->
     <div class="max-w-5xl mx-auto mb-8">
         <x-card>
@@ -96,5 +95,11 @@
             </div>
         </x-card>
     </div>
+</div>
+<div class="flex justify-center mt-16">
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <x-button type="submit" variant="secondary" class="text-brown px-10 py-3 text-lg">Log Out</x-button>
+    </form>
 </div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto py-12" x-data="{ openPauseModalId: null }">
+
     <div class="max-w-5xl mx-auto">
         <!-- Personalized Greeting -->
         <div class="mb-8 text-center">
@@ -135,12 +135,14 @@
             </div>
             @endif
         </div>
-
-        <form method="POST" action="{{ route('logout') }}" class="mt-8 text-center">
-            @csrf
-            <x-button type="submit" variant="secondary">Log Out</x-button>
-        </form>
     </div>
+</div>
+
+<div class="flex justify-center mt-16">
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <x-button type="submit" variant="secondary" class="text-brown px-10 py-3 text-lg">Log Out</x-button>
+    </form>
 </div>
 
 <script>

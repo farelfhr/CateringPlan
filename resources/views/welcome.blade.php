@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="flex-1 flex justify-center">
-                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80" 
+                <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=800&q=80" 
                      alt="Healthy Colorful Salad Bowl" class="w-80 md:w-96 rounded-4xl shadow-2xl transform hover:scale-105 transition-transform duration-300 object-cover" />
             </div>
         </div>
@@ -347,8 +347,8 @@
                         </svg>
                     </div>
                     <div class="text-left">
-                        <h3 class="font-heading text-xl text-brown">Muhammad Farel Alfathir</h3>
-                        <p class="text-brown">Founder & CEO</p>
+                        <h3 class="font-heading text-xl text-brown">Manajer Brian</h3>
+                        <p class="text-brown">Manager</p>
                     </div>
                 </div>
                 <div class="flex items-center justify-center">

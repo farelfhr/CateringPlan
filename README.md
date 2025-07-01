@@ -135,12 +135,12 @@ Pastikan database sudah dibuat dan kredensial sudah benar sebelum menjalankan mi
    php artisan serve
    ```
 
-### Akun Admin Default
+### Akun Default
 
-Setelah menjalankan seeder, Anda dapat login sebagai admin menggunakan akun berikut:
+Setelah menjalankan seeder, Anda dapat login menggunakan akun berikut:
 
-- **Email**: admin@seacatering.com
-- **Password**: password
+- **Admin**: Email: admin@seacatering.com, Password: password
+- **User**: Email: user@seacatering.com, Password: password
 
 ## 📋 Struktur File Utama
 

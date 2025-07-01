@@ -9,15 +9,15 @@
     </div>
 </div>
 
-<!-- Pesan dari Founder -->
+<!-- Pesan dari Manager -->
 <div class="container mx-auto px-4 mb-16 fade-in-up" x-data x-intersect="$el.classList.add('animate-fade-in-up')">
     <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
         <div class="flex-shrink-0 flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary to-accent overflow-hidden">
-            <img src="https://avatars.githubusercontent.com/u/206429660?v=4" alt="" class="w-24 h-24 object-cover rounded-full border-4 border-white shadow" />
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Manajer Brian" class="w-24 h-24 object-cover rounded-full border-4 border-white shadow" />
         </div>
         <div>
-            <h3 class="font-heading text-2xl text-brown font-bold mb-1">Muhammad Farel Alfathir</h3>
-            <p class="text-brown mb-2">Founder & CEO, SEA Catering</p>
+            <h3 class="font-heading text-2xl text-brown font-bold mb-1">Manajer Brian</h3>
+            <p class="text-brown mb-2">Manager, SEA Catering</p>
             <blockquote class="italic text-brown/80">"Kepuasan dan kesehatan Anda adalah detak jantung dari bisnis kami. Saya dan tim selalu siap mendengarkan dan melayani Anda dengan sepenuh hati."</blockquote>
         </div>
     </div>
@@ -120,7 +120,7 @@
 
 <!-- Section Testimoni Carousel -->
 <div class="container mx-auto px-4 mb-16 fade-in-up" x-data="{ currentSlide: 0, rating: 0, hoverRating: 0, testimonials: {{ $testimonials->toJson() }} }" x-intersect="$el.classList.add('animate-fade-in-up')">
-    <h2 class="text-3xl font-heading text-brown text-center mb-8">Kisah Sukses dari Keluarga SEA Catering</h2>
+    <h2 class="text-3xl font-heading text-brown text-center mb-8">Testimoni Sea Catering</h2>
     <div class="relative max-w-4xl mx-auto">
         <div class="overflow-hidden rounded-3xl bg-gradient-to-r from-pink-50 to-blue-50">
             <div class="flex transition-transform duration-500 ease-in-out" :style="`transform: translateX(-${currentSlide * 100}%)`">

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MealPlanSeeder::class,
             AdminUserSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
