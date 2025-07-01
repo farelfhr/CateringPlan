@@ -23,9 +23,6 @@ Route::middleware(['auth'])->group(function () {
     })->name('subscription');
     Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscription.store');
     
-    // Alternative route for subscription creation
-    Route::get('/subscriptions/create', [SubscriptionController::class, 'create'])->name('subscription.create');
-    
     // User Dashboard routes
     Route::get('/dashboard/user', [App\Http\Controllers\UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::post('/subscriptions/{subscription}/pause', [App\Http\Controllers\UserDashboardController::class, 'pauseSubscription'])->name('subscription.pause');
@@ -38,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
 // Admin routes
 Route::middleware(['auth', 'can:access-admin-dashboard'])->group(function () {
     Route::get('/dashboard/admin', [App\Http\Controllers\AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard/admin/testimonials', [App\Http\Controllers\Admin\TestimonialController::class, 'index'])->name('admin.testimonials.index');
+    Route::patch('/dashboard/admin/testimonials/{id}/approve', [App\Http\Controllers\Admin\TestimonialController::class, 'approve'])->name('admin.testimonials.approve');
+    Route::delete('/dashboard/admin/testimonials/{id}', [App\Http\Controllers\Admin\TestimonialController::class, 'destroy'])->name('admin.testimonials.destroy');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

@@ -97,4 +97,11 @@
         </x-card>
     </div>
 </div>
+
+<nav class="mb-6">
+    <ul class="flex space-x-4">
+        <li><a href="{{ route('admin.dashboard') }}" class="text-blue-600 hover:underline">Dashboard</a></li>
+        <li><a href="{{ route('admin.testimonials.index') }}" class="text-blue-600 hover:underline">Manage Testimonials</a></li>
+    </ul>
+</nav>
 @endsection

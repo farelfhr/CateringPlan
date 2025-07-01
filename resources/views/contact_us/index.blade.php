@@ -5,7 +5,13 @@
     currentSlide: 0,
     rating: 0,
     hoverRating: 0,
-    testimonials: {{ $testimonials->toJson() }}
+    testimonials: {!! $testimonials->map(function($t) {
+        return [
+            'customer_name' => $t->customer_name ?? $t->name,
+            'review_message' => $t->review_message ?? $t->review,
+            'rating' => $t->rating,
+        ];
+    })->toJson() !!}
 }">
     <div class="max-w-6xl mx-auto">
         <!-- Header -->
@@ -141,7 +147,7 @@
                                 <div class="text-center">
                                     <!-- Avatar -->
                                     <div class="w-20 h-20 bg-gradient-to-br from-pink-400 to-blue-400 rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <span class="text-white text-2xl font-bold" x-text="testimonial.name.charAt(0).toUpperCase()"></span>
+                                        <span class="text-white text-2xl font-bold" x-text="testimonial.customer_name.charAt(0).toUpperCase()"></span>
                                     </div>
                                     
                                     <!-- Rating -->
@@ -158,12 +164,12 @@
                                         <svg class="w-12 h-12 text-pink-200 absolute -top-6 -left-6" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                                         </svg>
-                                        <p class="text-lg text-brown leading-relaxed italic" x-text="testimonial.review"></p>
+                                        <p class="text-lg text-brown leading-relaxed italic" x-text="testimonial.review_message"></p>
                                     </div>
                                     
                                     <!-- Author -->
                                     <div>
-                                        <h4 class="font-heading text-xl text-brown font-semibold" x-text="testimonial.name"></h4>
+                                        <h4 class="font-heading text-xl text-brown font-semibold" x-text="testimonial.customer_name"></h4>
                                         <p class="text-brown">Pelanggan Setia</p>
                                     </div>
                                 </div>
