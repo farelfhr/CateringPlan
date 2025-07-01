@@ -84,6 +84,21 @@ Website sepenuhnya responsif dengan breakpoints:
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
 
+## Konfigurasi Environment
+
+Sebelum menjalankan aplikasi, salin file `.env.example` menjadi `.env` dan isi variabel-variabel penting berikut sesuai kebutuhan Anda:
+
+- `APP_NAME`
+- `APP_URL`
+- `DB_CONNECTION`
+- `DB_HOST`
+- `DB_PORT`
+- `DB_DATABASE`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+
+Pastikan database sudah dibuat dan kredensial sudah benar sebelum menjalankan migrasi.
+
 ## 🚀 Cara Menjalankan
 
 1. **Clone repository**
@@ -119,6 +134,13 @@ Website sepenuhnya responsif dengan breakpoints:
    ```bash
    php artisan serve
    ```
+
+### Akun Admin Default
+
+Setelah menjalankan seeder, Anda dapat login sebagai admin menggunakan akun berikut:
+
+- **Email**: admin@seacatering.com
+- **Password**: password
 
 ## 📋 Struktur File Utama
 

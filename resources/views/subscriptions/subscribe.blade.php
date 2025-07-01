@@ -110,7 +110,7 @@
                             <x-label>Tipe Makanan</x-label>
                             <p class="text-sm text-brown mb-3">Pilih tipe makanan yang ingin Anda terima</p>
                             <div class="grid grid-cols-2 gap-3">
-                                <template x-for="type in ['Sarapan', 'Makan Siang', 'Makan Malam', 'Snack']" :key="type">
+                                <template x-for="type in ['Breakfast', 'Lunch', 'Dinner']" :key="type">
                                     <label class="relative cursor-pointer">
                                         <input type="checkbox" name="meal_types[]" :value="type" x-model="selectedMealTypes" class="sr-only">
                                         <div class="border-2 rounded-xl p-3 text-center transition-all duration-200 flex items-center justify-center relative"

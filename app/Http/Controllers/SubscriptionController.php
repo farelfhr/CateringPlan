@@ -31,7 +31,7 @@ class SubscriptionController extends Controller
             $validatedData = $request->validate([
                 'plan' => ['required', 'exists:meal_plans,id'],
                 'meal_types' => ['required', 'array', 'min:1'],
-                'meal_types.*' => ['string'],
+                'meal_types.*' => ['string', 'in:Breakfast,Lunch,Dinner'],
                 'delivery_days' => ['required', 'array', 'min:1'],
                 'delivery_days.*' => ['string'],
                 'start_date' => ['required', 'date', 'after_or_equal:today'],
