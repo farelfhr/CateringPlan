@@ -16,12 +16,18 @@ class UserDashboardController extends Controller
 
     public function pauseSubscription(Request $request, Subscription $subscription, SubscriptionService $service)
     {
+        // Authorization: ensure user owns the subscription
+        if (auth()->id() !== $subscription->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+        
         $request->validate([
             'pause_start_date' => 'required|date|after:today',
             'pause_end_date' => 'required|date|after:pause_start_date',
         ]);
+        
         $service->pause($subscription, $request->pause_start_date, $request->pause_end_date);
-        return back()->with('success', 'Subscription paused!');
+        return back()->with('success', 'Subscription paused successfully!');
     }
 
     public function cancelSubscription(Subscription $subscription)
@@ -40,15 +46,22 @@ class UserDashboardController extends Controller
 
     public function reactivateSubscription(Request $request, Subscription $subscription)
     {
-        $this->authorize('update', $subscription);
+        // Authorization: ensure user owns the subscription
+        if (auth()->id() !== $subscription->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+        
         if ($subscription->status !== 'paused') {
             return back()->with('error', 'Only paused subscriptions can be reactivated.');
         }
-        $subscription->status = 'active';
-        $subscription->reactivated_at = now();
-        $subscription->pause_start_date = null;
-        $subscription->pause_end_date = null;
-        $subscription->save();
+        
+        $subscription->update([
+            'status' => 'active',
+            'reactivated_at' => now(),
+            'pause_start_date' => null,
+            'pause_end_date' => null,
+        ]);
+        
         return back()->with('success', 'Subscription reactivated successfully!');
     }
 }

@@ -5,3 +5,109 @@
 body {
     @apply bg-background font-sans min-h-screen;
 }
+
+/* Custom Components for Subscription Page */
+@layer components {
+    /* Floating heart animation */
+    .floating-heart {
+        @apply absolute animate-float;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+
+    /* Cute icon styling */
+    .cute-icon {
+        @apply text-4xl inline-block animate-bounce-gentle;
+    }
+
+    /* Section title styling */
+    .section-title {
+        @apply text-4xl md:text-5xl font-heading font-bold mb-6;
+    }
+
+    /* Gradient text effect */
+    .gradient-text {
+        @apply bg-gradient-to-r from-pink-pastel-500 to-rose-pastel-500 bg-clip-text text-transparent;
+    }
+
+    /* Section subtitle styling */
+    .section-subtitle {
+        @apply text-lg md:text-xl text-pink-pastel-600 mb-12 max-w-2xl mx-auto;
+    }
+
+    /* Subscription card styling */
+    .subscription-card {
+        @apply bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-pink-pastel-100 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1;
+    }
+
+    /* Feature card styling */
+    .feature-card {
+        @apply bg-gradient-to-br from-pink-pastel-50 to-rose-pastel-50 rounded-2xl p-6 border border-pink-pastel-100 hover:border-pink-pastel-200 transition-all duration-200 hover:shadow-lg;
+    }
+
+    /* Primary button styling */
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-pink-pastel-500 to-rose-pastel-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-pastel-300 focus:ring-offset-2;
+    }
+
+    /* Secondary button styling */
+    .btn-secondary {
+        @apply inline-flex items-center justify-center px-8 py-4 bg-white text-pink-pastel-600 font-semibold rounded-full border-2 border-pink-pastel-200 shadow hover:shadow-lg hover:border-pink-pastel-300 transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-pastel-300 focus:ring-offset-2;
+    }
+
+    /* Card component base styling */
+    .card {
+        @apply bg-white rounded-2xl p-6 shadow-lg border border-gray-100;
+    }
+
+    /* Enhanced shadow utilities */
+    .shadow-3xl {
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+    }
+}
+
+/* Custom animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes bounce-gentle {
+    0%, 100% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+    50% {
+        transform: translateY(-5px);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+}
+
+/* Additional utility classes */
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-bounce-gentle {
+    animation: bounce-gentle 2s infinite;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .subscription-card {
+        @apply p-6;
+    }
+    
+    .section-title {
+        @apply text-3xl;
+    }
+    
+    .cute-icon {
+        @apply text-3xl;
+    }
+}

@@ -5,6 +5,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\MealPlanController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
@@ -16,7 +17,10 @@ Route::post('/testimonials', [ContactUsController::class, 'store'])->name('testi
 
 // Authenticated routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/subscribe', [SubscriptionController::class, 'create'])->name('subscription');
+    Route::get('/subscribe', function () {
+        $mealPlans = \App\Models\MealPlan::all();
+        return view('subscriptions.subscribe', compact('mealPlans'));
+    })->name('subscription');
     Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscription.store');
     
     // User Dashboard routes
@@ -33,9 +37,7 @@ Route::middleware(['auth', 'can:access-admin-dashboard'])->group(function () {
     Route::get('/dashboard/admin', [App\Http\Controllers\AdminDashboardController::class, 'index'])->name('admin.dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
