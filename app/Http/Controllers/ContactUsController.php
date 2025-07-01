@@ -16,22 +16,44 @@ class ContactUsController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'review' => ['required', 'string', 'max:2000'],
-            'rating' => ['required', 'integer', 'min:1', 'max:5'],
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'review' => ['required', 'string', 'max:2000'],
+                'rating' => ['required', 'integer', 'min:1', 'max:5'],
+            ], [
+                'name.required' => 'Nama harus diisi.',
+                'name.max' => 'Nama maksimal 255 karakter.',
+                'review.required' => 'Review harus diisi.',
+                'review.max' => 'Review maksimal 2000 karakter.',
+                'rating.required' => 'Rating harus dipilih.',
+                'rating.integer' => 'Rating harus berupa angka.',
+                'rating.min' => 'Rating minimal 1 bintang.',
+                'rating.max' => 'Rating maksimal 5 bintang.',
+            ]);
 
-        // Sanitasi review untuk XSS
-        $review = Purifier::clean($request->review);
+            // Sanitasi input untuk mencegah XSS
+            $sanitizedName = Purifier::clean($validatedData['name']);
+            $sanitizedReview = Purifier::clean($validatedData['review']);
 
-        Testimonial::create([
-            'customer_name' => $request->name,
-            'review_message' => $review,
-            'rating' => $request->rating,
-            'status' => 'pending',
-        ]);
+            Testimonial::create([
+                'customer_name' => $sanitizedName,
+                'review_message' => $sanitizedReview,
+                'rating' => $validatedData['rating'],
+                'status' => 'pending',
+            ]);
 
-        return redirect()->back()->with('success', 'Terima kasih atas testimoni Anda! Testimoni akan direview dan diposting segera.');
+            return redirect()->back()->with('success', 'Terima kasih atas testimoni Anda! Testimoni akan direview dan diposting segera.');
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($e->errors());
+                
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['general' => 'Terjadi kesalahan saat mengirim testimoni. Silakan coba lagi.']);
+        }
     }
 }

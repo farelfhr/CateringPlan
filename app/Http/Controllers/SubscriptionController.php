@@ -8,15 +8,10 @@ use App\Models\Subscription;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mews\Purifier\Facades\Purifier;
 
 class SubscriptionController extends Controller
 {
-    public function create()
-    {
-        $mealPlans = MealPlan::all();
-        return view('subscriptions.create', compact('mealPlans'));
-    }
-
     public function store(Request $request)
     {
         Log::info('SUBSCRIPTION STORE REQUEST', $request->all());
@@ -62,6 +57,10 @@ class SubscriptionController extends Controller
                 'allergies.max' => 'Informasi alergi maksimal 1000 karakter.',
             ]);
 
+            // Sanitasi input untuk mencegah XSS
+            $sanitizedAddress = Purifier::clean($validatedData['address']);
+            $sanitizedAllergies = $validatedData['allergies'] ? Purifier::clean($validatedData['allergies']) : null;
+
             $mealPlan = \App\Models\MealPlan::findOrFail($validatedData['plan']);
             $mealTypesCount = count($validatedData['meal_types']);
             $deliveryDaysCount = count($validatedData['delivery_days']);
@@ -77,9 +76,9 @@ class SubscriptionController extends Controller
                 'meal_types' => $validatedData['meal_types'],
                 'delivery_days' => $validatedData['delivery_days'],
                 'start_date' => $validatedData['start_date'],
-                'address' => $validatedData['address'],
+                'address' => $sanitizedAddress,
                 'phone' => $validatedData['phone'],
-                'allergies' => $validatedData['allergies'],
+                'allergies' => $sanitizedAllergies,
                 'total_price' => $totalPrice,
                 'status' => 'active',
             ]);
